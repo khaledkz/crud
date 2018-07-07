@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import ProgrammeList from '../reducers/Reducer';
+import centralStore from '../reducers/Reducer';
 
 const rootReducer = combineReducers({
-    ProgrammeList
+    centralStore
 });
 
 
