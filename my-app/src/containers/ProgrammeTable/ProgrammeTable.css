@@ -6,6 +6,7 @@
     width:90%;
     margin:auto;
     margin-bottom: 30px;
+    border:solid 1px black !important;
 }
 .program-table thead{
     text-align: center;
@@ -17,8 +18,6 @@
 .program-table .row-name{
     text-align: justify
 }
-.in-active{
-    background: rgb(221, 221, 221);
-    color: rgb(128, 128, 128);
-    border:solid 1px rgb(221, 221, 221);;
-}
+.program-table .in-active{
+    color: rgba(122, 114, 114, 0.527);
+ }

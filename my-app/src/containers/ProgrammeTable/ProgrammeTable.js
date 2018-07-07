@@ -30,7 +30,7 @@ export default class ProgrammeTable extends Component {
                                 <th>Description </th>
                                 <th>Active Status</th>
                             </tr>
-                        </thead>grayed out reactstrip
+                        </thead> 
                         {/* table body */}
                         <tbody>
                             {/* table rows */}
