@@ -1,0 +1,24 @@
+.table-alert{margin-top:10px}
+.program-table tbody tr{
+    text-align: center;
+ }
+.program-table{
+    width:90%;
+    margin:auto;
+    margin-bottom: 30px;
+}
+.program-table thead{
+    text-align: center;
+}
+.program-table .row-descriptiopn{
+    max-width: 460px;
+    text-align: justify
+}
+.program-table .row-name{
+    text-align: justify
+}
+.in-active{
+    background: rgb(221, 221, 221);
+    color: rgb(128, 128, 128);
+    border:solid 1px rgb(221, 221, 221);;
+}
