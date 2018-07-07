@@ -1,23 +1,46 @@
-.table-alert{margin-top:10px}
-.program-table tbody tr{
-    text-align: center;
- }
-.program-table{
-    width:90%;
-    margin:auto;
-    margin-bottom: 30px;
-    border:solid 1px black !important;
+.table-alert {
+  margin-top: 10px;
 }
-.program-table thead{
-    text-align: center;
+.program-table tbody tr {
+  text-align: center;
 }
-.program-table .row-descriptiopn{
-    max-width: 460px;
-    text-align: justify
+.program-table {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px;
+  border: solid 1px black !important;
 }
-.program-table .row-name{
-    text-align: justify
+.program-table thead {
+  text-align: center;
 }
-.program-table .in-active{
-    color: rgba(122, 114, 114, 0.527);
- }
+.program-table .row-descriptiopn {
+  max-width: 460px;
+  text-align: justify;
+}
+.program-table .row-name {
+  text-align: justify;
+}
+.program-table .in-active {
+  color: rgba(122, 114, 114, 0.527);
+}
+.add-programe {
+  margin-left: 60px;
+  margin-bottom: 20px;
+}
+
+.programeContainer {
+  background: rgb(204, 229, 255);
+  margin-top: 0px;
+  margin-bottom: 20px;
+  padding: 30px;
+}
+
+.cancelBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+input:focus {
+  background-color: yellow;
+}

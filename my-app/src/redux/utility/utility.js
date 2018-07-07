@@ -9,6 +9,5 @@ const Utility={
         return myList;
       },
 }
-
   
 export default Utility
