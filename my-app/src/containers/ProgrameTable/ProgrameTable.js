@@ -64,7 +64,7 @@ class ProgrameTable extends Component {
                     <th scope="row">{i + 1}</th>
                     <td className="row-name">{programme.name}</td>
                     <td className="row-descriptiopn">
-                      {programme.shortDescription}
+                      {programme.shortDescription.length>150?programme.shortDescription.substr(0, 150)+'...':programme.shortDescription}
                     </td>
                     <td>
                       {" "}
