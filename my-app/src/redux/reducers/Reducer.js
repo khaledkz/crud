@@ -2,16 +2,16 @@ import MockData from "../../data/data";
 import Utility from '../utility/utility';
 
 const ProgrammesList = (
-  state = { programmesList: MockData.results },
+  state = { programmesList: MockData.results,total:MockData.totalResults,success: true},
   action
 ) => {
-  
-  switch (action.type) {
+   switch (action.type) {
     case "removeProgram":
       return {
         ...state,
         ...{
-          programmesList: Utility.removeProgramFunc(state.programmesList, action.id)
+          programmesList: Utility.removeProgramFunc(state.programmesList, action.id),
+          total:state.total-1
         }
       };
     // case 'updatePrices':
