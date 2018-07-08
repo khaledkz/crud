@@ -7,8 +7,8 @@ const Action = {
   //     store.dispatch({type:'updatePrices',products})
   // ),
 
-  removeProgramme: id => store.dispatch({ type: "removeProgramme", id })
-  
+  removeProgramme: id => store.dispatch({ type: "removeProgramme", id }),
+  addNewProgramme: programme => store.dispatch({tyoe:'addNewProgramme',programme}),
   // //Dispatch an action type updateCurency with Currency selected and exchange ratio to convert all prices
   // updateCurency:(newCurrency)=>(
   //     store.dispatch({type:'updateCurency',newCurrency:newCurrency})
