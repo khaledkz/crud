@@ -36,6 +36,7 @@ class ProgrameTable extends Component {
               {/* table header */}
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>ID</th>
                   <th>Name</th>
                   <th>Description </th>
@@ -52,6 +53,7 @@ class ProgrameTable extends Component {
                     className={programme.active ? "active" : "in-active"}
                   >
                     <th scope="row">{i + 1}</th>
+                    <th scope="row">{programme.id}</th>
                     <td className="row-name">{programme.name}</td>
                     <td className="row-descriptiopn">
                       {programme.shortDescription.length > 150
