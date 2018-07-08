@@ -28,7 +28,7 @@ class ProgrameTable extends Component {
   };
 
   render(props) {
-    if (this.props.success) {
+     if (this.props.success) {
       return (
         <div>
           <TableAlert />

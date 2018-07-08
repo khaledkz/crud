@@ -57,8 +57,8 @@ class AddProgramme extends Component {
         const newProgramme = {
           name: this.state.programName,
           id: this.state.programID,
-          active: this.state.active,
-          desciprion: this.state.programDescription
+          active: this.state.active==="true"?true:false,
+          shortDescription: this.state.programDescription
         };
         this.props.addNewProgramme(newProgramme);
         this.props.closeAddProgrameScreen();

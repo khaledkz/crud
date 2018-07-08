@@ -1,4 +1,4 @@
-const Utility = {
+const helpers = {
   removeProgrammeFunc: (progList, id) => {
     let index;
     let myList = [...progList];
@@ -10,4 +10,4 @@ const Utility = {
   }
 };
 
-export default Utility;
+export default helpers;

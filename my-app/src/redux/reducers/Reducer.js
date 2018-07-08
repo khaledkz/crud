@@ -1,18 +1,31 @@
 import MockData from "../../data/data";
-import Utility from '../utility/utility';
+import Helpers from "../utility/helpers";
 
 const ProgrammesList = (
-  state = { programmesList: MockData.results,total:MockData.totalResults,success: true},
+  state = {
+    programmesList: MockData.results,
+    total: MockData.totalResults,
+    success: true
+  },
   action
 ) => {
-   switch (action.type) {
+  switch (action.type) {
     case "removeProgramme":
       return {
         ...state,
         ...{
-          programmesList: Utility.removeProgrammeFunc(state.programmesList, action.id),
-          total:state.total-1
+          programmesList: Helpers.removeProgrammeFunc(
+            state.programmesList,
+            action.id
+          ),
+          total: state.total - 1
         }
+      };
+
+    case "addNewProgramme":
+      return {
+        ...state,
+        programmesList: [...state.programmesList, action.programme]
       };
     // case 'updatePrices':
     //  return {...state,...{products:action.products,currency:state.currency,extchangeRate:state.extchangeRate,shoppingCart:state.shoppingCart}};
