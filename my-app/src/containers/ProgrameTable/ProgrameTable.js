@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import {
-  Table,
-  Alert,
-  Button,
- } from "reactstrap";
+import { Table, Alert, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./ProgrameTable.css";
- import { connect } from "react-redux";
+import { connect } from "react-redux";
 import Action from "../../redux/actions/Action";
 import TableAlert from "../../components/TableAlert/TableAlert";
-import AddProgramme from '../../components/AddProgramme/AddProgramme'
+import AddProgramme from "../../components/AddProgramme/AddProgramme";
 class ProgrameTable extends Component {
   state = {
     showAddSection: false,
@@ -18,8 +14,7 @@ class ProgrameTable extends Component {
 
   removeRow = id => Action.removePrograms(id);
   addPrograme = () => {
-   
-    window.scrollTo(0, window.innerHeight)
+    window.scrollTo(0, window.innerHeight);
     this.setState({
       showAddSection: true,
       showTable: false
@@ -84,16 +79,20 @@ class ProgrameTable extends Component {
               </tbody>
             </Table>
           ) : null}
+          {this.state.showAddSection ? null : (
+            <Button
+              color="primary"
+              className="add-programe"
+              onClick={() => this.addPrograme()}
+            >
+              Add New Programme
+            </Button>
+          )}
 
-          <Button
-            color="primary"
-            className="add-programe"
-            onClick={() => this.addPrograme()}
-          >
-            Add New Programme
-          </Button>
           {this.state.showAddSection ? (
-            <AddProgramme closeAddProgrameScreen={this.closeAddProgrameScreen}/>
+            <AddProgramme
+              closeAddProgrameScreen={this.closeAddProgrameScreen}
+            />
           ) : null}
         </div>
       );

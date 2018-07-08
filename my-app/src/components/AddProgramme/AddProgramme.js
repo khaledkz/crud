@@ -53,7 +53,7 @@ class AddProgramme extends Component {
             idExsist: null
           });
         }, 3000);
-      }else{
+      } else {
         this.props.closeAddProgrameScreen();
       }
     }
