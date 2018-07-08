@@ -13,6 +13,7 @@ class ProgrameTable extends Component {
   };
 
   removeRow = id => Action.removeProgramme(id);
+  addNewProgramme = programme => Action.addNewProgramme(programme);
   addPrograme = () => {
     window.scrollTo(0, window.innerHeight);
     this.setState({
@@ -94,6 +95,7 @@ class ProgrameTable extends Component {
           {this.state.showAddSection ? (
             <AddProgramme
               closeAddProgrameScreen={this.closeAddProgrameScreen}
+              addNewProgramme={this.addNewProgramme}
             />
           ) : null}
         </div>

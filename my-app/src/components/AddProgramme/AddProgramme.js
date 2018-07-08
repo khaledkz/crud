@@ -54,6 +54,13 @@ class AddProgramme extends Component {
           });
         }, 3000);
       } else {
+        const newProgramme = {
+          name: this.state.programName,
+          id: this.state.programID,
+          active: this.state.active,
+          desciprion: this.state.programDescription
+        };
+        this.props.addNewProgramme(newProgramme);
         this.props.closeAddProgrameScreen();
       }
     }
@@ -95,7 +102,6 @@ class AddProgramme extends Component {
                 This ID is already exist ! try another ID.
               </Alert>
             ) : null}
-
             <Input
               type="number"
               name="programID"
@@ -104,7 +110,6 @@ class AddProgramme extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
-
           <FormGroup>
             <Label>Programe Name:</Label>
             {this.state.nameNotSubmited ? (
@@ -112,7 +117,6 @@ class AddProgramme extends Component {
                 You must add the programme Name
               </Alert>
             ) : null}
-
             <Input
               onChange={this.handleChange}
               type="text"
@@ -120,7 +124,6 @@ class AddProgramme extends Component {
               placeholder="name"
             />
           </FormGroup>
-
           <FormGroup>
             <Label for="exampleText">Programe Description</Label>
             {this.state.desciprionNotSubmited ? (
@@ -128,7 +131,6 @@ class AddProgramme extends Component {
                 You must add the programme Description
               </Alert>
             ) : null}
-
             <Input
               onChange={this.handleChange}
               type="textarea"
@@ -142,7 +144,6 @@ class AddProgramme extends Component {
                 You must choose the display option
               </Alert>
             ) : null}
-
             <FormGroup check>
               <Label check>
                 <Input
@@ -166,7 +167,6 @@ class AddProgramme extends Component {
               </Label>
             </FormGroup>
           </FormGroup>
-
           <Button
             onClick={this.handleSubmit}
             type="button"
@@ -182,7 +182,6 @@ class AddProgramme extends Component {
 }
 
 const stateToProps = state => {
-  console.log(state);
   return {
     total: state.centralStore.total,
     success: state.centralStore.successTableAlert,
