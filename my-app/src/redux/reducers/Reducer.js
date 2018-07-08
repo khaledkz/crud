@@ -6,11 +6,11 @@ const ProgrammesList = (
   action
 ) => {
    switch (action.type) {
-    case "removeProgram":
+    case "removeProgramme":
       return {
         ...state,
         ...{
-          programmesList: Utility.removeProgramFunc(state.programmesList, action.id),
+          programmesList: Utility.removeProgrammeFunc(state.programmesList, action.id),
           total:state.total-1
         }
       };
