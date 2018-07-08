@@ -12,7 +12,7 @@ class ProgrameTable extends Component {
     showTable: true
   };
 
-  removeRow = id => Action.removePrograms(id);
+  removeRow = id => Action.removeProgramme(id);
   addPrograme = () => {
     window.scrollTo(0, window.innerHeight);
     this.setState({
