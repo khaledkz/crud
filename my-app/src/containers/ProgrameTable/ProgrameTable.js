@@ -3,37 +3,32 @@ import {
   Table,
   Alert,
   Button,
-  Col,
-  Row,
-  Form,
-  FormGroup,
-  ListGroup,
-  Label,
-  Input
-} from "reactstrap";
+ } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./ProgrameTable.css";
-import MockData from "../../data/data";
-import { connect } from "react-redux";
+ import { connect } from "react-redux";
 import Action from "../../redux/actions/Action";
 import TableAlert from "../../components/TableAlert/TableAlert";
-
+import AddProgramme from '../../components/AddProgramme/AddProgramme'
 class ProgrameTable extends Component {
   state = {
     showAddSection: false,
-    showTable:true
+    showTable: true
   };
 
   removeRow = id => Action.removePrograms(id);
   addPrograme = () => {
-    {window.scrollTo(0,window.innerHeight)} 
-    this.setState({ showAddSection: true,
-      showTable:false });
+   
+    window.scrollTo(0, window.innerHeight)
+    this.setState({
+      showAddSection: true,
+      showTable: false
+    });
   };
 
   closeAddProgrameScreen = () => {
-    {window.scrollTo(0,0)} 
-    this.setState({ showAddSection: false,showTable:true });
+    window.scrollTo(0, 0);
+    this.setState({ showAddSection: false, showTable: true });
   };
 
   render(props) {
@@ -64,7 +59,9 @@ class ProgrameTable extends Component {
                     <th scope="row">{i + 1}</th>
                     <td className="row-name">{programme.name}</td>
                     <td className="row-descriptiopn">
-                      {programme.shortDescription.length>150?programme.shortDescription.substr(0, 150)+'...':programme.shortDescription}
+                      {programme.shortDescription.length > 150
+                        ? programme.shortDescription.substr(0, 150) + "..."
+                        : programme.shortDescription}
                     </td>
                     <td>
                       {" "}
@@ -88,8 +85,7 @@ class ProgrameTable extends Component {
             </Table>
           ) : null}
 
-
-           <Button
+          <Button
             color="primary"
             className="add-programe"
             onClick={() => this.addPrograme()}
@@ -97,46 +93,8 @@ class ProgrameTable extends Component {
             Add New Programme
           </Button>
           {this.state.showAddSection ? (
-            <div className="container programeContainer">
-              <div className="cancelBtn">
-              <legend>New Programme:</legend>
-              <Button color="danger" onClick={this.closeAddProgrameScreen}>
-                <span>&#10006;</span>
-              </Button>
-              </div>
-              <Form className="">
-                <FormGroup>
-                  <Label>Programe ID:</Label>
-                  <Input type="number" name="programID" placeholder="ID" autoFocus="true"/>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label>Programe Name:</Label>
-                  <Input type="text" name="programID" placeholder="name" />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="exampleText">Programe Description</Label>
-                  <Input type="textarea" name="programDescription" />
-                </FormGroup>
-
-                <legend>Display</legend>
-                <FormGroup check>
-                  <Label check>
-                    <Input type="radio" name="radio1" /> Active
-                  </Label>
-                </FormGroup>
-                <FormGroup check>
-                  <Label check>
-                    <Input type="radio" name="radio1" /> Inactive
-                  </Label>
-                </FormGroup>
-                <Button type="button" className="mt-3" color="danger">Submit</Button>
-              </Form>
-            </div>
+            <AddProgramme closeAddProgrameScreen={this.closeAddProgrameScreen}/>
           ) : null}
-
-
         </div>
       );
     } else {
