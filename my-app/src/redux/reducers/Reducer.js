@@ -21,22 +21,29 @@ const ProgrammesList = (
           total: state.total - 1
         }
       };
-
     case "addNewProgramme":
       return {
         ...state,
         programmesList: [...state.programmesList, action.programme]
       };
+      case "sortById":
+      return ({
+        ...state,
+        programmesList: [...state.programmesList.sort((obj1,obj2)=>(obj1.id-obj2.id))]
+      })
+      case "sortByName":
+      return({
+        ...state,
+        programmesList: [...state.programmesList.sort(Helpers.compareNames)]
+      })
     // case 'updatePrices':
     //  return {...state,...{products:action.products,currency:state.currency,extchangeRate:state.extchangeRate,shoppingCart:state.shoppingCart}};
-
     //  case 'updateCurency':
     //  let updateSinglePrice=(x)=>{
     //        let newPrice=(x.price/state.extchangeRate)*action.newCurrency.value;
     //        newPrice=newPrice.toFixed(2);
     //        return {product:x.product,price:newPrice}
     //  }
-
     //  return {...state,...{products:state.products.map((x)=>{
     //    return updateSinglePrice(x);
     //  }),currency:action.newCurrency.currency,extchangeRate:action.newCurrency.value,shoppingCart:state.shoppingCart}};

@@ -7,6 +7,18 @@ const helpers = {
     });
     myList.splice(index, 1);
     return myList;
+  },
+  compareNames:(a, b)=>{
+    // Use toUpperCase() to ignore character casing
+    const nameFirstObject = a.name.toUpperCase();
+    const nameSecandObject = b.name.toUpperCase();
+    let comparison = 0;
+    if (nameFirstObject > nameSecandObject) {
+      comparison = 1;
+    } else if (nameFirstObject < nameSecandObject) {
+      comparison = -1;
+    }
+    return comparison;
   }
 };
 

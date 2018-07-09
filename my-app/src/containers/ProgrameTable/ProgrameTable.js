@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Action from "../../redux/actions/Action";
 import TableAlert from "../../components/TableAlert/TableAlert";
 import AddProgramme from "../../components/AddProgramme/AddProgramme";
+import sortIcon from "./sortIcon.png";
 class ProgrameTable extends Component {
   state = {
     showAddSection: false,
@@ -28,7 +29,7 @@ class ProgrameTable extends Component {
   };
 
   render(props) {
-     if (this.props.success) {
+    if (this.props.success) {
       return (
         <div>
           <TableAlert />
@@ -38,8 +39,24 @@ class ProgrameTable extends Component {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>ID</th>
-                  <th>Name</th>
+                  <th>
+                    ID{" "}
+                    <img
+                      src={sortIcon}
+                      className="sortICon"
+                      title="sort table by Id"
+                      onClick={() => Action.sortById()}
+                    />
+                  </th>
+                  <th>
+                    Name{" "}
+                    <img
+                      src={sortIcon}
+                      className="sortICon"
+                      title="sort table by name"
+                      onClick={() => Action.sortByName()}
+                    />
+                  </th>
                   <th>Description </th>
                   <th>Active Status</th>
                   <th>Remove</th>

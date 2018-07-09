@@ -27,14 +27,12 @@
   margin-left: 60px;
   margin-bottom: 20px;
 }
-
 .programeContainer {
   background: rgb(204, 229, 255);
   margin-top: 0px;
   margin-bottom: 20px;
   padding: 30px;
 }
-
 .cancelBtn {
   display: flex;
   flex-direction: row;
@@ -44,3 +42,11 @@
 input:focus {
   background-color: yellow;
 }
+.sortICon{
+  width:30px;
+  height: 30px;
+  border:solid 1px rgb(211, 202, 202);
+ }
+ .sortICon:hover{
+  background:rgba(216, 220, 221, 0.815);
+ }
