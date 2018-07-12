@@ -196,8 +196,7 @@ class ProgrameTable extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-  return {
+   return {
     programmesList: state.programme.programmesList,
     success: state.programme.success,
     total: state.programme.total,
