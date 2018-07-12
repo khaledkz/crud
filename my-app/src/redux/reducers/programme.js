@@ -1,5 +1,6 @@
 import MockData from "../../data/data";
 import Helpers from "../utility/helpers";
+import * as Types from "../Actions/types";
 
 const ProgrammesList = (
   state = {
@@ -11,36 +12,36 @@ const ProgrammesList = (
   action
 ) => {
   switch (action.type) {
-    case "removeProgramme":
+    case Types.REMOVE_PROGRAMME:
       return {
         ...state,
         ...{
           programmesList: Helpers.removeProgrammeFunc(
             state.programmesList,
-            action.id
+            action.ID
           ),
           total: state.total - 1
         }
       };
-    case "ADD_PROGRAMME":
+    case Types.ADD_PROGRAMME:
       return {
         ...state,
         programmesList: [...state.programmesList, action.programme],
         searchForProgram: null
       };
-    case "sortById":
+    case Types.SEARCH_BY_ID:
       return {
         ...state,
         programmesList: [
           ...state.programmesList.sort((obj1, obj2) => obj1.id - obj2.id)
         ]
       };
-    case "sortByName":
+    case Types.SEARCH_BY_NAME:
       return {
         ...state,
         programmesList: [...state.programmesList.sort(Helpers.compareNames)]
       };
-    case "searchForProgram":
+    case Types.SEARCH_FOR_PROGRAMME:
       return {
         ...state,
         searchForProgram: [
@@ -49,7 +50,7 @@ const ProgrammesList = (
           )
         ]
       };
-    case "resetSearchForProgramme":
+    case Types.RESET_SEARCH_FOR_PROGRAMME:
       return { ...state, searchForProgram: null };
     default:
       return state;

@@ -1,103 +1,24 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
+import React from "react";
+ import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 
-class AddProgramme extends Component {
-  state = {
-    nameNotSubmited: null,
-    idSNotubmited: null,
-    desciprionNotSubmited: null,
-    displayNotSubmited: null,
-    idExsist: null
-  };
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-  handleSubmit = () => {
-    let errors = null;
-    if (!this.state.programName) {
-      this.setState({ nameNotSubmited: true });
-      errors = true;
-    }
-    if (!this.state.programID) {
-      this.setState({ idSNotubmited: true });
-      errors = true;
-    }
-    if (!this.state.programDescription) {
-      this.setState({ desciprionNotSubmited: true });
-      errors = true;
-    }
-    if (!this.state.active) {
-      this.setState({ displayNotSubmited: true });
-      errors = true;
-    }
-
-    if (errors) {
-      //clear the error message
-      setTimeout(() => {
-        this.setState({
-          nameNotSubmited: null,
-          idSNotubmited: null,
-          desciprionNotSubmited: null,
-          displayNotSubmited: null
-        });
-      }, 3000);
-    } else {
-      let existId = this.checkID();
-      if (existId) {
-        this.setState({ idExsist: true });
-        //clear the error message
-        setTimeout(() => {
-          this.setState({
-            idExsist: null
-          });
-        }, 3000);
-      } else {
-        const newProgramme = {
-          name: this.state.programName,
-          id: this.state.programID,
-          active: this.state.active==="true"?true:false,
-          shortDescription: this.state.programDescription
-        };
-        this.props.addNewProgramme(newProgramme);
-        this.props.closeAddProgrameScreen();
-      }
-    }
-  };
-
-  checkID() {
-    let idExsist = null;
-    let { programmesList } = this.props;
-    programmesList.map(program => {
-      if (program.id.toString() === this.state.programID) {
-        idExsist = true;
-        return program;
-      }
-      return program;
-    });
-    return idExsist;
-  }
-
-  render() {
-    return (
+const AddProgramme=(props)=> (
       <div className="container programeContainer">
         <div className="cancelBtn">
           <legend>New Programme:</legend>
-          <Button color="danger" onClick={this.props.closeAddProgrameScreen}>
+          <Button color="danger" onClick={props.closeAddProgrameScreen}>
             <span>&#10006;</span>
           </Button>
         </div>
         <Form className="">
           <FormGroup>
             <Label>Programe ID:</Label>
-            {this.state.idSNotubmited ? (
+            {props.idNotSubmited ? (
               <Alert color="danger" className="table-alert">
                 You must add the programme ID
               </Alert>
             ) : null}
 
-            {this.state.idExsist ? (
+            {props.idExsist ? (
               <Alert color="success" className="table-alert">
                 This ID is already exist ! try another ID.
               </Alert>
@@ -107,18 +28,18 @@ class AddProgramme extends Component {
               name="programID"
               placeholder="ID"
               autoFocus="true"
-              onChange={this.handleChange}
+              onChange={props.handleChange}
             />
           </FormGroup>
           <FormGroup>
             <Label>Programe Name:</Label>
-            {this.state.nameNotSubmited ? (
+            {props.nameNotSubmited ? (
               <Alert color="danger" className="table-alert">
                 You must add the programme Name
               </Alert>
             ) : null}
             <Input
-              onChange={this.handleChange}
+              onChange={props.handleChange}
               type="text"
               name="programName"
               placeholder="name"
@@ -126,20 +47,20 @@ class AddProgramme extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="exampleText">Programe Description</Label>
-            {this.state.desciprionNotSubmited ? (
+            {props.desciprionNotSubmited ? (
               <Alert color="danger" className="table-alert">
                 You must add the programme Description
               </Alert>
             ) : null}
             <Input
-              onChange={this.handleChange}
+              onChange={props.handleChange}
               type="textarea"
               name="programDescription"
             />
           </FormGroup>
           <FormGroup tag="fieldset">
             <legend>Display</legend>
-            {this.state.displayNotSubmited ? (
+            {props.displayNotSubmited ? (
               <Alert color="danger" className="table-alert">
                 You must choose the display option
               </Alert>
@@ -147,7 +68,7 @@ class AddProgramme extends Component {
             <FormGroup check>
               <Label check>
                 <Input
-                  onChange={this.handleChange}
+                  onChange={props.handleChange}
                   type="radio"
                   name="active"
                   value="true"
@@ -158,7 +79,7 @@ class AddProgramme extends Component {
             <FormGroup check>
               <Label check>
                 <Input
-                  onChange={this.handleChange}
+                  onChange={props.handleChange}
                   type="radio"
                   name="active"
                   value="false"
@@ -168,7 +89,7 @@ class AddProgramme extends Component {
             </FormGroup>
           </FormGroup>
           <Button
-            onClick={this.handleSubmit}
+            onClick={props.handleSubmit}
             type="button"
             className="mt-3"
             color="danger"
@@ -178,14 +99,6 @@ class AddProgramme extends Component {
         </Form>
       </div>
     );
-  }
-}
+ 
 
-const stateToProps = state => {
-  return {
-    total: state.programme.total,
-    success: state.programme.successTableAlert,
-    programmesList: state.programme.programmesList
-  };
-};
-export default connect(stateToProps)(AddProgramme);
+export default AddProgramme;
