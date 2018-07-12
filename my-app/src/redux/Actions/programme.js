@@ -1,4 +1,4 @@
-import * as Types from './types'
+import * as Types from './types' 
 export const addNewProgramme =(programme)=>({type:Types.ADD_PROGRAMME,programme})
 export const removeProgramme =(ID)=>({type:Types.REMOVE_PROGRAMME,ID})
 export const resetSearchForProgramme =()=>({type:Types.RESET_SEARCH_FOR_PROGRAMME})

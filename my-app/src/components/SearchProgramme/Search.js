@@ -18,7 +18,7 @@ import exitIcon from "./x.png";
     onChange={props.handleChange}
     value={props.searchValue}
   />
-  <img src={exitIcon} onClick={props.resetSearch} />
+  <img src={exitIcon} onClick={props.resetSearchImg} />
 </FormGroup>
  )
 

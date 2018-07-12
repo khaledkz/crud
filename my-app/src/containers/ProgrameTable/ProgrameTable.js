@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Alert, Button } from "reactstrap";
+import { Alert, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./ProgrameTable.css";
 import { connect } from "react-redux";
@@ -7,9 +7,9 @@ import TableAlert from "../../components/TableAlert/TableAlert";
 import AddProgramme from "../../components/AddProgramme/AddProgramme";
 import sortIcon from "./sortIcon.png";
 import Search from "../../components/SearchProgramme/Search";
-import * as Action from "../../redux/Actions/programme";
+import StvTable from "../../components/Table/Table";
 
-import { addNewProgramme } from "../../redux/Actions/programme";
+import dispatchToProps from "./dispatchToProps";
 
 class ProgrameTable extends Component {
   constructor(props) {
@@ -24,21 +24,22 @@ class ProgrameTable extends Component {
       displayNotSubmited: null,
       idExsist: null
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleSearchSubmitByImg = this.handleSearchSubmitByImg.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
-  handleSubmit = e => {
+  handleSearchSubmit = e => {
     if (e.keyCode === 13) {
       this.props.searchProgram(this.state.value);
     }
   };
 
-  handleSubmitByImg = e => {
+  handleSearchSubmitByImg = e => {
     this.props.searchProgram(this.state.value);
   };
 
-  handleChange = e => this.setState({ value: e.target.value });
+  handleSearchChange = e => this.setState({ value: e.target.value });
 
   addNewProgramme = programme => this.props.submitNewProgramme(programme);
   addPrograme = () => {
@@ -57,7 +58,9 @@ class ProgrameTable extends Component {
     this.setState({ value: "" });
     this.props.resetSearchForProgramme();
   };
-
+  resetSearchByImg = () => {
+    this.setState({ value: "" });
+  };
   handleAddProgramChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -116,7 +119,7 @@ class ProgrameTable extends Component {
   checkID() {
     let idExsist = null;
     let { programmesList } = this.props;
-     programmesList.map(program => {
+    programmesList.map(program => {
       if (program.id.toString() === this.state.programID) {
         idExsist = true;
         return program;
@@ -128,127 +131,31 @@ class ProgrameTable extends Component {
 
   render() {
     const { searchForProgram } = this.props;
-    if (this.props.success) {
+    const props = this.props;
+    if (props.success) {
       return (
         <div>
-          <TableAlert total={this.props.total} success={this.props.sucess} />
+          <TableAlert total={props.total} success={props.sucess} />
 
-          {this.props.total > 0 && this.state.showTable ? (
+          {props.total > 0 && this.state.showTable ? (
             <div>
               <Search
                 searchValue={this.state.value}
-                handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
+                handleSubmit={this.handleSearchSubmit}
+                handleChange={this.handleSearchChange}
                 resetSearch={this.resetSearch}
-                handleSubmitByImg={this.handleSubmitByImg}
+                resetSearchImg={this.resetSearchByImg}
+                handleSubmitByImg={this.handleSearchSubmitByImg}
               />
-              <Table bordered hover responsive className="program-table">
-                {/* table header */}
-
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>
-                      ID{" "}
-                      <img
-                        src={sortIcon}
-                        className="sortICon"
-                        title="sort table by Id"
-                        onClick={() => this.props.sortById()}
-                      />
-                    </th>
-                    <th>
-                      Name{" "}
-                      <img
-                        src={sortIcon}
-                        className="sortICon"
-                        title="sort table by name"
-                        onClick={() => this.props.sortByName()}
-                      />
-                    </th>
-                    <th>Description </th>
-                    <th>Active Status</th>
-                    <th>
-                      {searchForProgram && searchForProgram.length > 0
-                        ? "Close"
-                        : "Remove"}
-                    </th>
-                  </tr>
-                </thead>
-                {/* table body */}
-                <tbody>
-                  {searchForProgram && searchForProgram.length > 0 ? (
-                    <tr
-                      className={
-                        searchForProgram[0].active ? "active" : "in-active"
-                      }
-                    >
-                      <th scope="row">1</th>
-                      <th scope="row">{searchForProgram[0].id}</th>
-                      <td className="row-name">{searchForProgram[0].name}</td>
-                      <td className="row-descriptiopn">
-                        {searchForProgram[0].shortDescription.length > 150
-                          ? searchForProgram[0].shortDescription.substr(
-                              0,
-                              150
-                            ) + "..."
-                          : searchForProgram[0].shortDescription}
-                      </td>
-                      <td>
-                        {" "}
-                        {searchForProgram[0].active ? (
-                          <span>&#10004;</span>
-                        ) : (
-                          <span>&#10006;</span>
-                        )}
-                      </td>
-                      <td>
-                        <Button
-                          onClick={() => this.resetSearch()}
-                          color="success"
-                        >
-                          &#10006;
-                        </Button>
-                      </td>
-                    </tr>
-                  ) : (
-                    this.props.programmesList.map((programme, i) => (
-                      <tr
-                        key={i}
-                        className={programme.active ? "active" : "in-active"}
-                      >
-                        <th scope="row">{i + 1}</th>
-                        <th scope="row">{programme.id}</th>
-                        <td className="row-name">{programme.name}</td>
-                        <td className="row-descriptiopn">
-                          {programme.shortDescription.length > 150
-                            ? programme.shortDescription.substr(0, 150) + "..."
-                            : programme.shortDescription}
-                        </td>
-                        <td>
-                          {" "}
-                          {programme.active ? (
-                            <span>&#10004;</span>
-                          ) : (
-                            <span>&#10006;</span>
-                          )}
-                        </td>
-                        <td>
-                          <Button
-                            onClick={() =>
-                              this.props.removeProgramme(programme.id)
-                            }
-                            color="danger"
-                          >
-                            &#10006;
-                          </Button>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                  {/* table rows */}
-                </tbody>
-              </Table>
+              <StvTable
+                resetSearch={this.resetSearch}
+                sortIcon={sortIcon}
+                sortById={props.sortById}
+                sortByName={props.sortByName}
+                searchForProgram={props.searchForProgram}
+                programmesList={props.programmesList}
+                removeProgramme={props.removeProgramme}
+              />
             </div>
           ) : null}
           {this.state.showAddSection ? null : (
@@ -289,26 +196,12 @@ class ProgrameTable extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     programmesList: state.programme.programmesList,
     success: state.programme.success,
     total: state.programme.total,
     searchForProgram: state.programme.searchForProgram
-  };
-};
-
-const dispatchToProps = dispatch => {
-  return {
-    submitNewProgramme: programme => {
-      dispatch(addNewProgramme(programme));
-    },
-    removeProgramme: ID => {
-      dispatch(Action.removeProgramme(ID));
-    },
-    resetSearchForProgramme: () => dispatch(Action.resetSearchForProgramme()),
-    sortByName: () => dispatch(Action.sortByName()),
-    sortById: () => dispatch(Action.sortById()),
-    searchProgram: programme => dispatch(Action.searchForProgram(programme))
   };
 };
 
