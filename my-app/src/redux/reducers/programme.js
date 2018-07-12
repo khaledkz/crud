@@ -22,7 +22,7 @@ const ProgrammesList = (
           total: state.total - 1
         }
       };
-    case "addNewProgramme":
+    case "ADD_PROGRAMME":
       return {
         ...state,
         programmesList: [...state.programmesList, action.programme],

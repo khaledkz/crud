@@ -52,4 +52,5 @@ const stateToProps = state => {
     searchForProgram: state.programme.searchForProgram
   };
 };
+
 export default connect(stateToProps)(Search);
