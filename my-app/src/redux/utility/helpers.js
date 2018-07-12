@@ -9,7 +9,7 @@ const helpers = {
     return myList;
   },
   compareNames:(a, b)=>{
-    // Use toUpperCase() to ignore character casing
+
     const nameFirstObject = a.name.toUpperCase();
     const nameSecandObject = b.name.toUpperCase();
     let comparison = 0;

@@ -129,7 +129,6 @@ class ProgrameTable extends Component {
   }
 
   render() {
-    const { searchForProgram } = this.props;
     const props = this.props;
     if (props.success) {
       return (
@@ -175,8 +174,7 @@ class ProgrameTable extends Component {
               checkID={this.checkID}
               idNotSubmited={this.state.idNotSubmited}
               nameNotSubmited={this.state.nameNotSubmited}
-              idNotSubmited={this.state.idNotSubmited}
-              desciprionNotSubmited={this.state.desciprionNotSubmited}
+               desciprionNotSubmited={this.state.desciprionNotSubmited}
               displayNotSubmited={this.state.displayNotSubmited}
               idExsist={this.state.idExsist}
             />

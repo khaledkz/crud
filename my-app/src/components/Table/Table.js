@@ -9,6 +9,7 @@ const StvTable = props => (
         <th>
           ID{" "}
           <img
+          alt="sortICon"
             src={props.sortIcon}
             className="sortICon"
             title="sort table by Id"
@@ -18,6 +19,7 @@ const StvTable = props => (
         <th>
           Name{" "}
           <img
+          alt="sortICon"
             src={props.sortIcon}
             className="sortICon"
             title="sort table by name"
