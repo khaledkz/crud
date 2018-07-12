@@ -1,11 +1,8 @@
 import React from "react";
 import { Table ,Button} from "reactstrap";
 
-
 const StvTable = props => (
   <Table bordered hover responsive className="program-table">
-    {/* table header */}
-
     <thead>
       <tr>
         <th>#</th>
@@ -86,7 +83,6 @@ const StvTable = props => (
           </tr>
         ))
       )}
-      {/* table rows */}
     </tbody>
   </Table>
 );

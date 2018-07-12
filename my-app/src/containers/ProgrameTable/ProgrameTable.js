@@ -8,7 +8,6 @@ import AddProgramme from "../../components/AddProgramme/AddProgramme";
 import sortIcon from "./sortIcon.png";
 import Search from "../../components/SearchProgramme/Search";
 import StvTable from "../../components/Table/Table";
-
 import dispatchToProps from "./dispatchToProps";
 
 class ProgrameTable extends Component {
