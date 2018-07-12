@@ -7,6 +7,7 @@ import Action from "../../redux/actions/Action";
 import TableAlert from "../../components/TableAlert/TableAlert";
 import AddProgramme from "../../components/AddProgramme/AddProgramme";
 import sortIcon from "./sortIcon.png";
+import Search from "../../components/SearchProgramme/Search";
 class ProgrameTable extends Component {
   state = {
     showAddSection: false,
@@ -28,76 +29,125 @@ class ProgrameTable extends Component {
     this.setState({ showAddSection: false, showTable: true });
   };
 
+  resetSearchForProgramme = () => Action.resetSearchForProgramme();
   render(props) {
+    const { searchForProgram } = this.props;
     if (this.props.success) {
       return (
         <div>
           <TableAlert />
+
           {this.props.total > 0 && this.state.showTable ? (
-            <Table bordered hover responsive className="program-table">
-              {/* table header */}
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>
-                    ID{" "}
-                    <img
-                      src={sortIcon}
-                      className="sortICon"
-                      title="sort table by Id"
-                      onClick={() => Action.sortById()}
-                    />
-                  </th>
-                  <th>
-                    Name{" "}
-                    <img
-                      src={sortIcon}
-                      className="sortICon"
-                      title="sort table by name"
-                      onClick={() => Action.sortByName()}
-                    />
-                  </th>
-                  <th>Description </th>
-                  <th>Active Status</th>
-                  <th>Remove</th>
-                </tr>
-              </thead>
-              {/* table body */}
-              <tbody>
-                {/* table rows */}
-                {this.props.ProgrammesList.map((programme, i) => (
-                  <tr
-                    key={i}
-                    className={programme.active ? "active" : "in-active"}
-                  >
-                    <th scope="row">{i + 1}</th>
-                    <th scope="row">{programme.id}</th>
-                    <td className="row-name">{programme.name}</td>
-                    <td className="row-descriptiopn">
-                      {programme.shortDescription.length > 150
-                        ? programme.shortDescription.substr(0, 150) + "..."
-                        : programme.shortDescription}
-                    </td>
-                    <td>
-                      {" "}
-                      {programme.active ? (
-                        <span>&#10004;</span>
-                      ) : (
-                        <span>&#10006;</span>
-                      )}
-                    </td>
-                    <td>
-                      <Button
-                        onClick={() => this.removeRow(programme.id)}
-                        color="danger"
-                      >
-                        &#10006;
-                      </Button>
-                    </td>
+            <div>
+              <Search />
+              <Table bordered hover responsive className="program-table">
+                {/* table header */}
+
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>
+                      ID{" "}
+                      <img
+                        src={sortIcon}
+                        className="sortICon"
+                        title="sort table by Id"
+                        onClick={() => Action.sortById()}
+                      />
+                    </th>
+                    <th>
+                      Name{" "}
+                      <img
+                        src={sortIcon}
+                        className="sortICon"
+                        title="sort table by name"
+                        onClick={() => Action.sortByName()}
+                      />
+                    </th>
+                    <th>Description </th>
+                    <th>Active Status</th>
+                    <th>
+                      {searchForProgram && searchForProgram.length > 0
+                        ? "Close"
+                        : "Remove"}
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                {/* table body */}
+                <tbody>
+                  {searchForProgram && searchForProgram.length > 0 ? (
+                    <tr
+                      className={
+                        searchForProgram[0].active ? "active" : "in-active"
+                      }
+                    >
+                      <th scope="row">1</th>
+                      <th scope="row">{searchForProgram[0].id}</th>
+                      <td className="row-name">{searchForProgram[0].name}</td>
+                      <td className="row-descriptiopn">
+                        {searchForProgram[0].shortDescription.length > 150
+                          ? searchForProgram[0].shortDescription.substr(
+                              0,
+                              150
+                            ) + "..."
+                          : searchForProgram[0].shortDescription}
+                      </td>
+                      <td>
+                        {" "}
+                        {searchForProgram[0].active ? (
+                          <span>&#10004;</span>
+                        ) : (
+                          <span>&#10006;</span>
+                        )}
+                      </td>
+                      <td>
+                        <Button
+                          onClick={() =>
+                            this.resetSearchForProgramme(searchForProgram[0].id)
+                          }
+                          color="success"
+                        >
+                          &#10006;
+                        </Button>
+                      </td>
+                    </tr>
+                  ) : (
+                    this.props.ProgrammesList.map((programme, i) => (
+                      <tr
+                        key={i}
+                        className={programme.active ? "active" : "in-active"}
+                      >
+                        <th scope="row">{i + 1}</th>
+                        <th scope="row">{programme.id}</th>
+                        <td className="row-name">{programme.name}</td>
+                        <td className="row-descriptiopn">
+                          {programme.shortDescription.length > 150
+                            ? programme.shortDescription.substr(0, 150) + "..."
+                            : programme.shortDescription}
+                        </td>
+                        <td>
+                          {" "}
+                          {programme.active ? (
+                            <span>&#10004;</span>
+                          ) : (
+                            <span>&#10006;</span>
+                          )}
+                        </td>
+                        <td>
+                          <Button
+                            onClick={() => this.removeRow(programme.id)}
+                            color="danger"
+                          >
+                            &#10006;
+                          </Button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                  {/* table rows */}
+                </tbody>
+              </Table>
+            </div>
           ) : null}
           {this.state.showAddSection ? null : (
             <Button
@@ -129,9 +179,10 @@ class ProgrameTable extends Component {
 
 const stateToProps = state => {
   return {
-    ProgrammesList: state.centralStore.programmesList,
-    success: state.centralStore.success,
-    total: state.centralStore.total
+    ProgrammesList: state.programme.programmesList,
+    success: state.programme.success,
+    total: state.programme.total,
+    searchForProgram: state.programme.searchForProgram
   };
 };
 export default connect(stateToProps)(ProgrameTable);

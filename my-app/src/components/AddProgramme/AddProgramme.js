@@ -183,9 +183,9 @@ class AddProgramme extends Component {
 
 const stateToProps = state => {
   return {
-    total: state.centralStore.total,
-    success: state.centralStore.successTableAlert,
-    programmesList: state.centralStore.programmesList
+    total: state.programme.total,
+    success: state.programme.successTableAlert,
+    programmesList: state.programme.programmesList
   };
 };
 export default connect(stateToProps)(AddProgramme);

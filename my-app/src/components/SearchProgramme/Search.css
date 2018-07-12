@@ -1,0 +1,22 @@
+.searchInput {
+  max-width: 400px;
+  margin: auto;
+  margin-bottom: 15px;
+  border: solid 2px rgb(214, 220, 223);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.searchInput img:first-child {
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+}
+.searchInput img:last-child {
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+}

@@ -23,8 +23,8 @@ class TableAlert extends Component {
 
 const stateToProps = state => {
    return {
-     total: state.centralStore.total,
-     success: state.centralStore.success
+     total: state.programme.total,
+     success: state.programme.success
   };
 };
 export default connect(stateToProps)(TableAlert);
